@@ -9,6 +9,7 @@ var getRow = function (rowIndex) {
     const newArr = [1];
     const lastArr = arr[arr.length - 1];
 
+    
     for (let i = 1; i < lastArr.length; i++) {
       newArr.push(lastArr[i - 1] + lastArr[i]);
 
