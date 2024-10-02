@@ -9,17 +9,24 @@
 //   ];
 
 arr1 =
-  [{"id":1,"b":{"b": 94},"v":[4,3],"y":48}]
+  [{"id":1,"x":36,"d":26,"f":35},{"id":3,"c":20,"z":75}]
 arr2 =
-  [{"id":1,"b":{"c": 84},"v":[1,3]}]
+  [{"id":2,"o":48,"z":84,"y":61}]
 
 var join = function(arr1, arr2) {
+  const map = new Map();
   const newArr = [...arr1, ...arr2]
 
-  const transformedValue = newArr.reduce((prev, item) => ({...prev, [item.id]: item}), {})
+  newArr.forEach(item => {
+    if(map.has(item.id)) {
+      map.set(item.id, {...map.get(item.id), ...item})
+    }else {
+      map.set(item.id, item)
+    }
+  })
 
-  return Object.values(transformedValue)
+  return [...map.values()].sort((a,b) => a.id - b.id)
 };
 
 
-console.log(join(arr1, arr2)) // [{"id": 1, "x": 1}, {"id": 2, "x": 9}, {"id": 3, "x": 5}]
+console.log(join(arr1, arr2))
