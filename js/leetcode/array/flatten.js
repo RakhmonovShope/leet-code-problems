@@ -1,11 +1,20 @@
-const result = [];
+
 
 var flat = function (arr, n) {
   if (n === 0) return arr;
 
+  let currentDepth = 0;
+
+  const trackDepth = function (arr, n) {
+    for*
+  }
+
+
+
+
   for (let i = 0; i < arr.length; i++) {
     if (Array.isArray(arr[i])) {
-      flat(arr[i]);
+      flat(arr[i], n-1);
     } else {
       result.push(arr[i]);
     }
