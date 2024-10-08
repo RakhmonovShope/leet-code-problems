@@ -1,4 +1,5 @@
 var timeLimit = function (fn, t) {
+
   return async function (...args) {
     const promise1 = fn(...args);
     const rejectPromise = new Promise((resolve, reject) => {
