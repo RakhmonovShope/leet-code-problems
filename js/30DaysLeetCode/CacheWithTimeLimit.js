@@ -13,7 +13,7 @@ TimeLimitedCache.prototype.set = function (key, value, duration) {
     this.hash.delete(key);
   }, duration);
 
-  this.hash.set(key, {value, timer});
+  this.hash.set(key, { value, timer });
 
   return isExisting;
 };
@@ -24,7 +24,6 @@ TimeLimitedCache.prototype.get = function (key) {
   }
   return -1;
 };
-
 
 TimeLimitedCache.prototype.count = function () {
   return this.hash.size;

@@ -6,8 +6,7 @@ var compose = function (functions) {
       newX = functions[i](newX);
     }
     return newX;
-  }
+  };
 };
 
-
-console.log(compose([a => a + 1, a => a + 2, a => a + 3])(4));
+console.log(compose([(a) => a + 1, (a) => a + 2, (a) => a + 3])(4));
