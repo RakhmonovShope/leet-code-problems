@@ -1,8 +1,10 @@
 var missingNumber = function (nums) {
+  // for (let i = 0; i <= nums.length; i++) {
+  //   if (!nums.includes(i)) return i;
+  // }
   for (let i = 0; i <= nums.length; i++) {
-    if (!nums.includes(i)) return i;
+    if (nums.indexOf(i) < 0) return i;
   }
-
   // const map = new Set(nums);
   //
   // for (let i = 0; i <= nums.length; i++) {
@@ -10,4 +12,4 @@ var missingNumber = function (nums) {
   // }
 };
 
-console.log(missingNumber([0, 2, 3]));
+console.log(missingNumber([0, 2, 1, 3]));
