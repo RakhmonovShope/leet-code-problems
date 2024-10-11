@@ -1,19 +1,7 @@
 var addDigits = function (num) {
-  if (num < 10) return num;
-  let ss = num;
+  if (num % 9 === 0) return 9;
 
-  while (String(ss).length !== 1) {
-    let sum = 0;
-
-    while (ss !== 0) {
-      sum = sum + Math.floor(ss % 10);
-      ss = Math.floor(ss / 10);
-    }
-
-    ss = sum;
-  }
-
-  return ss;
+  return num % 9;
 };
 
-console.log(addDigits(16));
+console.log(addDigits(2321));
