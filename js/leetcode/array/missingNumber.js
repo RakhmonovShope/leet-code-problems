@@ -11,10 +11,22 @@ var missingNumber = function (nums) {
   //   if (!map.has(i)) return i;
   // }
 
-  const sum = (nums.length * (nums.length + 1)) / 2;
-  const sumExistance = nums.reduce((prev, item) => prev + item, 0);
+  // const sum = (nums.length * (nums.length + 1)) / 2;
+  // const sumExistance = nums.reduce((prev, item) => prev + item, 0);
+  //
+  // return sum - sumExistance;
 
-  return sum - sumExistance;
+  let result;
+
+  for (let i = 0; i <= nums.length; i++) {
+    result ^= i;
+  }
+
+  nums.forEach((item) => {
+    result ^= item;
+  });
+
+  return result;
 };
 
-console.log(missingNumber([0, 2, 1, 3]));
+console.log(missingNumber([1, 3, 2, 0]));
