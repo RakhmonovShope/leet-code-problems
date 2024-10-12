@@ -16,16 +16,36 @@
 
 // 2 - solution
 
+// var moveZeroes = function (nums) {
+//   const zerosArray = [];
+//   const numbersArray = [];
+//
+//   for (let i = 0; i < nums.length; i++) {
+//     if (nums[i] === 0) zerosArray.push(0);
+//     else numbersArray.push(nums[i]);
+//   }
+//
+//   return [...numbersArray, ...zerosArray];
+// };
+
+// 3 - solution
+
 var moveZeroes = function (nums) {
-  const zerosArray = [];
-  const numbersArray = [];
+  let count = 0;
 
   for (let i = 0; i < nums.length; i++) {
-    if (nums[i] === 0) zerosArray.push(0);
-    else numbersArray.push(nums[i]);
+    if (nums[i] !== 0) {
+      nums[count] = nums[i];
+      count++;
+    }
   }
 
-  return [...numbersArray, ...zerosArray];
+  while (count !== nums.length) {
+    nums[count] = 0;
+    count++;
+  }
+
+  return nums;
 };
 
 const nums = [0, 1, 0, 3, 12];
