@@ -7,7 +7,6 @@
 // }
 
 const climbStairs = (n) => {
-
   let first = 1;
   let second = 1;
 
@@ -18,7 +17,6 @@ const climbStairs = (n) => {
   }
 
   return second;
-}
-
+};
 
 console.log(climbStairs(44));

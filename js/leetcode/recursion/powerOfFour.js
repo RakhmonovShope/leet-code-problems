@@ -15,15 +15,12 @@
 //   return check(n, 0);
 // }
 
-
 const checkPower = (n) => {
   if (n < 1) return false;
   if (n === 1) return true;
   if (n % 4 !== 0) return false;
 
   return checkPower(n / 4);
+};
 
-}
-
-
-console.log(checkPower(256))
+console.log(checkPower(256));
