@@ -1,5 +1,8 @@
 var NumArray = function (nums) {
-  this.nums = nums;
+  this.prefixArray = [0];
+  for (let i = 0; i < nums.length; i++) {
+    this.prefixArray[i + 1] = this.prefixArray[i] + nums[i];
+  }
 };
 
 /**
@@ -7,16 +10,11 @@ var NumArray = function (nums) {
  * @param {number} right
  * @return {number}
  */
-NumArray.prototype.sumRange = function (left, right) {
-  return this.nums.reduce((prev, curr, index) => {
-    if (index >= left && index <= right) {
-      return prev + curr;
-    }
 
-    return prev;
-  }, 0);
+NumArray.prototype.sumRange = function (left, right) {
+  return this.prefixArray[right + 1] - this.prefixArray[left];
 };
 
 const numArr = new NumArray([-2, 0, 3, -5, 2, -1]);
-
-console.log(numArr.sumRange(1, 2));
+console.log('numArr', numArr);
+console.log(numArr.sumRange(0, 3));
