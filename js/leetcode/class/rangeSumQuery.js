@@ -8,16 +8,15 @@ var NumArray = function (nums) {
  * @return {number}
  */
 NumArray.prototype.sumRange = function (left, right) {
-  let sum = 0;
+  return this.nums.reduce((prev, curr, index) => {
+    if (index >= left && index <= right) {
+      return prev + curr;
+    }
 
-  while (left <= right) {
-    sum += this.nums[left];
-    left++;
-  }
-
-  return sum;
+    return prev;
+  }, 0);
 };
 
 const numArr = new NumArray([-2, 0, 3, -5, 2, -1]);
 
-console.log(numArr.sumRange(2, 4));
+console.log(numArr.sumRange(1, 2));
