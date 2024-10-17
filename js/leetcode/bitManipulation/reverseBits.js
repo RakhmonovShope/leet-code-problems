@@ -1,9 +1,15 @@
 var reverseBits = function (n) {
-  const binary = n.toString(2).padStart(32, '0');
+  let result = 0;
 
-  const reversedString = binary.split('').reverse().join('');
+  for (let i = 0; i < 32; i++) {
+    result = result << 1;
 
-  return reversedString;
+    result |= n & 1;
+
+    n = n >> 1;
+  }
+
+  return result >>> 0;
 };
 
 const n = '00111001011110000010100101000000';
