@@ -15,18 +15,31 @@
 
 // 2 - solution
 
+// const numberOf1Bits = (n) => {
+//   let count = 0;
+//
+//   while (n) {
+//     count += n & 1;
+//
+//     n = n >> 1;
+//   }
+//
+//   return count;
+// };
+
+// 3 - solution
+
 const numberOf1Bits = (n) => {
   let count = 0;
 
   while (n) {
-    count += n & 1;
-
-    n = n >> 1;
+    n &= n - 1;
+    count++;
   }
 
   return count;
 };
 
-const t = 11;
+const t = 32142131232132;
 
 console.log(numberOf1Bits(t));
