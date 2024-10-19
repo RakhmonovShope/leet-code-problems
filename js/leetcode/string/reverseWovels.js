@@ -1,68 +1,75 @@
+// 1 - solution
+
 // const reverseVowels = (s) => {
 //   const hash = new Set(['a', 'i', 'o', 'u', 'e']);
-//   const hashIndex = new Set();
 //
-//   const textArray = s.split('');
+//   const vowels = s.split('');
+//   const arr = [];
+//   let count = 0;
 //
-//   let firstIndex = 0;
-//   let lastIndex = s.length - 1;
+//   for (let i = 0; i < vowels.length; i++) {
+//     if (hash.has(vowels[i].toLowerCase())) arr.push(vowels[i]);
+//   }
 //
-//   for (let i = 0; i < textArray.length; i++) {
-//     if (
-//       hash.has(textArray[firstIndex].toLowerCase()) &&
-//       hash.has(textArray[lastIndex].toLowerCase()) &&
-//       !hashIndex.has(lastIndex)
-//     ) {
-//       const temp = textArray[firstIndex];
-//       textArray[firstIndex] = textArray[lastIndex];
-//       textArray[lastIndex] = temp;
-//       hashIndex.add(firstIndex);
+//   arr.reverse();
 //
-//       firstIndex++;
-//       lastIndex--;
-//     } else if (
-//       !hash.has(textArray[firstIndex].toLowerCase()) &&
-//       !hash.has(textArray[lastIndex].toLowerCase())
-//     ) {
-//       lastIndex--;
-//       firstIndex++;
-//     } else if (
-//       hash.has(textArray[firstIndex].toLowerCase()) &&
-//       !hash.has(textArray[lastIndex].toLowerCase())
-//     ) {
-//       lastIndex--;
-//     } else if (
-//       hash.has(textArray[lastIndex]) &&
-//       !hash.has(textArray[firstIndex])
-//     ) {
-//       firstIndex++;
+//   for (let j = 0; j < vowels.length; j++) {
+//     if (hash.has(vowels[j].toLowerCase())) {
+//       vowels[j] = arr[count];
+//       count++;
 //     }
 //   }
 //
-//   return textArray.join('');
+//   return vowels.join('');
 // };
+
+// 2 - solution
 
 const reverseVowels = (s) => {
   const hash = new Set(['a', 'i', 'o', 'u', 'e']);
+  const hashIndex = new Set();
 
-  const vowels = s.split('');
-  const arr = [];
-  let count = 0;
+  const textArray = s.split('');
 
-  for (let i = 0; i < vowels.length; i++) {
-    if (hash.has(vowels[i].toLowerCase())) arr.push(vowels[i]);
-  }
+  let firstIndex = 0;
+  let lastIndex = s.length - 1;
 
-  arr.reverse();
-
-  for (let j = 0; j < vowels.length; j++) {
-    if (hash.has(vowels[j].toLowerCase())) {
-      vowels[j] = arr[count];
-      count++;
+  for (let i = 0; i < textArray.length; i++) {
+    if (
+      hash.has(textArray[firstIndex].toLowerCase()) &&
+      hash.has(textArray[lastIndex].toLowerCase()) &&
+      !hashIndex.has(lastIndex)
+    ) {
+      const temp = textArray[firstIndex];
+      textArray[firstIndex] = textArray[lastIndex];
+      textArray[lastIndex] = temp;
+      hashIndex.add(firstIndex);
+      console.log('has two');
+      firstIndex++;
+      lastIndex--;
+    } else if (
+      !hash.has(textArray[firstIndex].toLowerCase()) &&
+      !hash.has(textArray[lastIndex].toLowerCase())
+    ) {
+      console.log('no one');
+      firstIndex++;
+      lastIndex--;
+    } else if (
+      hash.has(textArray[firstIndex].toLowerCase()) &&
+      !hash.has(textArray[lastIndex].toLowerCase())
+    ) {
+      console.log('no last');
+      lastIndex--;
+    } else if (
+      hash.has(textArray[lastIndex].toLowerCase()) &&
+      !hash.has(textArray[firstIndex].toLowerCase())
+    ) {
+      console.log('no first');
+      firstIndex++;
     }
   }
 
-  return vowels.join('');
+  return textArray.join('');
 };
 
 // const text = 'IceCreAm';
@@ -71,6 +78,5 @@ const reverseVowels = (s) => {
 // const text = 'race a car';
 // const text = 'leetCode';
 const text = 'Egad! Loretta has Adams as mad as a hatter. Old age!';
-// const text = 'egad! LOretta has adams as mad As a hatter. old agE!';
-// const text = 'egad! LOretta has adams as mad As a hatter. old agE!';
+// const text = 'egad! Loretta has Adams as mad as a hatter. Old agE!';
 console.log(reverseVowels(text));
