@@ -1,6 +1,8 @@
-const validPerfectSquare = (n) => {
-  for (let i = 1; i <= Math.round(n / 2); i++) {
-    if (i * i === n) return true;
+const validPerfectSquare = (num) => {
+  const isOdd = num % 2 !== 0;
+
+  for (let i = isOdd ? 1 : 2; i <= Math.round(num / 2); i += 2) {
+    if (i * i === num) return true;
   }
 
   return false;
