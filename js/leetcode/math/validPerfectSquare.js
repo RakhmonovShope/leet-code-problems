@@ -1,5 +1,9 @@
 const validPerfectSquare = (n) => {
-  return Number.isInteger(Math.sqrt(n));
+  for (let i = 1; i <= Math.round(n / 2); i++) {
+    if (i * i === n) return true;
+  }
+
+  return false;
 };
 
-console.log(validPerfectSquare(129));
+console.log(validPerfectSquare(169));
