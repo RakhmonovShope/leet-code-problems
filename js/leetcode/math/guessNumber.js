@@ -1,17 +1,17 @@
 // 1- solution
 
-// var guess = function (num, target) {
-//   if (num === target) {
-//     return 0;
-//   } else if (num > target) {
-//     return -1;
-//   } else if (num < target) return 1;
-// };
-//
+var guess = function (num, target) {
+  if (num === target) {
+    return 0;
+  } else if (num > target) {
+    return -1;
+  } else if (num < target) return 1;
+};
+
 // const guessNumber = (n) => {
-//   let mid = Math.round(n / 2),
+//   let mid = Math.floor(n / 2),
 //     high = n,
-//     low = 0;
+//     low = 1;
 //
 //   while (high >= low) {
 //     if (guess(mid) === 0) {
