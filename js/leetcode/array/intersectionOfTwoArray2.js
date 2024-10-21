@@ -24,25 +24,36 @@
 // 2 - solution
 
 const intersectionOfTwoArray2 = (nums1, nums2) => {
+  const sortedOne = nums1.sort((a, b) => a - b);
+  const sortedTwo = nums2.sort((a, b) => a - b);
   const result = [];
+  const hashIndex = new Set();
 
-  for (let i = 0; i < nums1.length; i++) {
-    if (!hash.has(nums1[i])) {
-      const count = Math.min(
-        nums1.filter((item) => item === nums1[i]).length,
-        nums2.filter((item) => item === nums1[i]).length,
-      );
+  for (let i = 0; i < sortedOne.length; i++) {
+    const target = sortedOne[i];
 
-      hash.set(nums1[i], count);
+    let max = sortedTwo.length - 1;
+    let min = 0;
+
+    while (max >= min) {
+      const mid = Math.floor((max + min) / 2);
+
+      if (sortedTwo[mid] === target && !hashIndex.has(mid)) {
+        result.push(sortedTwo[mid]);
+        hashIndex.add(mid);
+        break;
+      } else if (sortedTwo[mid] > target) {
+        max = mid - 1;
+      } else {
+        min = mid + 1;
+      }
     }
   }
 
-  return Array.from(hash.entries()).flatMap(([value, count]) =>
-    Array(count).fill(value),
-  );
+  return result;
 };
 
-const num1 = [2, 2, 4, 5];
-const num2 = [2, 2, 2, 4, 4, 8, 9];
+const num1 = [2, 2, 4, 4, 4, 4, 4, 4, 4, 5];
+const num2 = [2, 2, 2, 4, 4, 4, 8, 9];
 
 console.log(intersectionOfTwoArray2(num1, num2));
