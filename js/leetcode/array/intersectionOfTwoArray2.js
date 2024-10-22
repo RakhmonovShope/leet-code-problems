@@ -27,26 +27,18 @@ const intersectionOfTwoArray2 = (nums1, nums2) => {
   const sortedOne = nums1.sort((a, b) => a - b);
   const sortedTwo = nums2.sort((a, b) => a - b);
   const result = [];
-  const hashIndex = new Set();
+  let i = 0,
+    j = 0;
 
-  for (let i = 0; i < sortedOne.length; i++) {
-    const target = sortedOne[i];
-
-    let max = sortedTwo.length - 1;
-    let min = 0;
-
-    while (max >= min) {
-      const mid = Math.floor((max + min) / 2);
-
-      if (sortedTwo[mid] === target && !hashIndex.has(mid)) {
-        result.push(sortedTwo[mid]);
-        hashIndex.add(mid);
-        break;
-      } else if (sortedTwo[mid] > target) {
-        max = mid - 1;
-      } else {
-        min = mid + 1;
-      }
+  while (i < sortedOne.length && j < sortedTwo.length) {
+    if (sortedTwo[j] === sortedOne[i]) {
+      result.push(sortedOne[i]);
+      i++;
+      j++;
+    } else if (sortedOne[i] < sortedTwo[j]) {
+      i++;
+    } else {
+      j++;
     }
   }
 
