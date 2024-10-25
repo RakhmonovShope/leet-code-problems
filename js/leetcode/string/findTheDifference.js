@@ -60,16 +60,12 @@ const findTheDifference = (s, t) => {
     }
   }
 
-  let result;
-
-  map.forEach((value, key) => {
-    if (value === 1 || value === -1) result = key;
-  });
-
-  return result;
+  for (let [key, value] of map) {
+    if (value === 1 || value === -1) return key;
+  }
 };
 
-const s = 'a';
-const t = 'aa';
+const s = 'abcd';
+const t = 'abcde';
 
 console.log(findTheDifference(s, t));
