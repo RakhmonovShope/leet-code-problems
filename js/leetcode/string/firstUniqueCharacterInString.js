@@ -11,21 +11,36 @@
 //   return -1;
 // };
 
-const firstUniqChar = (s) => {
-  const unique = new Set(s);
+// 2 - solution;
+//
+// const firstUniqChar = (s) => {
+//   const unique = new Set(s);
+//
+//   for (let i of unique) {
+//     const copy = s;
+//
+//     const replacedCopy = copy.replaceAll(i, '');
+//
+//     if (s.length - replacedCopy.length === 1) {
+//       return s.indexOf(i);
+//     }
+//   }
+//
+//   return -1;
+// };
 
-  for (let i of unique) {
-    const copy = s;
+// 3 - solution
 
-    const replacedCopy = copy.replaceAll(i, '');
-
-    if (s.length - replacedCopy.length === 1) {
-      return s.indexOf(i);
-    }
-  }
-
-  return -1;
-};
+// const firstUniqChar = (s) => {
+//   for (let i = 0; i < s.length; i++) {
+//     const copy = s;
+//     const replacedString = copy.replaceAll(s[i], '');
+//
+//     if (s.length - replacedString.length === 1) return i;
+//   }
+//
+//   return -1;
+// };
 
 const s = 'loveleetcode';
 
