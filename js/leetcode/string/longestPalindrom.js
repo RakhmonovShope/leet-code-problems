@@ -61,13 +61,6 @@ var longestPalindrome = function (s) {
   }
 
   for (let [key, value] of hash) {
-    if (value === 1) {
-      singleStringCount += 1;
-      hash.delete(key);
-    }
-  }
-
-  for (let [key, value] of hash) {
     if (value % 2 === 0) {
       result += value;
     } else {
