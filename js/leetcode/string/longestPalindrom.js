@@ -64,8 +64,7 @@ var longestPalindrome = function (s) {
     if (value % 2 === 0) {
       result += value;
     } else {
-      const count = Math.floor(value / 2);
-      result += count * 2;
+      result += Math.floor(value / 2) * 2;
       singleStringCount += 1;
     }
   }
