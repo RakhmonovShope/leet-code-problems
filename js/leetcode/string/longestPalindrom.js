@@ -49,9 +49,8 @@
 var longestPalindrome = function (s) {
   const hash = new Map();
 
-  let leftString = '';
-  let rightString = '';
-  let singleString = '';
+  let singleStringCount = 0;
+  let result = 0;
 
   for (let i = 0; i < s.length; i++) {
     if (hash.has(s[i])) {
@@ -63,33 +62,26 @@ var longestPalindrome = function (s) {
 
   for (let [key, value] of hash) {
     if (value === 1) {
-      singleString += key;
+      singleStringCount += 1;
       hash.delete(key);
     }
   }
 
   for (let [key, value] of hash) {
-    const lLength = leftString.length;
-    const rLength = rightString.length;
-
-    let count = 0;
-
     if (value % 2 === 0) {
-      count = value / 2;
+      result += value;
     } else {
-      count = Math.floor(value / 2);
-      singleString += key;
+      const count = Math.floor(value / 2);
+      result += count * 2;
+      singleStringCount += 1;
     }
-
-    leftString = leftString.padStart(count + lLength, key);
-    rightString = rightString.padEnd(count + rLength, key);
   }
 
-  if (singleString.length) {
-    return `${leftString + singleString[0] + rightString}`.length;
+  if (singleStringCount) {
+    return result + 1;
   }
 
-  return `${leftString + rightString}`.length;
+  return result;
 };
 
 const s = 'abccccddttttt';
