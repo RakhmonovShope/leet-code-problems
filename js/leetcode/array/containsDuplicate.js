@@ -16,58 +16,70 @@
 //   return false;
 // };
 
+// const containsDuplicate = (nums) => {
+//   const quickSort = (arr) => {
+//     if (arr.length < 1) return arr;
+//
+//     const pivot = Math.floor(arr.length / 2);
+//     const pivotValue = arr[pivot];
+//
+//     const left = [];
+//     const right = [];
+//
+//     for (let j = 0; j < arr.length; j++) {
+//       if (j !== pivot) {
+//         if (arr[j] > pivotValue) {
+//           right.push(arr[j]);
+//         } else {
+//           left.push(arr[j]);
+//         }
+//       }
+//     }
+//
+//     return [...quickSort(left), pivotValue, ...quickSort(right)];
+//   };
+//
+//   const arrForSearch = [];
+//
+//   const sortedArr = quickSort(nums);
+//
+//   const binarySearch = (arr, target) => {
+//     let max = arr.length - 1;
+//     let min = 0;
+//
+//     while (max >= min) {
+//       const mid = Math.floor((max + min) / 2);
+//
+//       if (arr[min] === target) {
+//         return mid;
+//       } else if (arr[mid] < target) {
+//         min = mid + 1;
+//       } else {
+//         max = mid - 1;
+//       }
+//     }
+//
+//     return -1;
+//   };
+//
+//   for (let i = 0; i < sortedArr.length; i++) {
+//     if (binarySearch(arrForSearch, sortedArr[i]) !== -1) {
+//       return true;
+//     } else {
+//       arrForSearch.push(sortedArr[i]);
+//     }
+//   }
+//
+//   return false;
+// };
+
 const containsDuplicate = (nums) => {
-  const quickSort = (arr) => {
-    if (arr.length < 1) return arr;
+  const hash = new Map();
 
-    const pivot = Math.floor(arr.length / 2);
-    const pivotValue = arr[pivot];
+  for (let i = 0; i < nums.length; i++) {
+    hash.set(nums[i], (hash.get(nums[i]) || 0) + 1);
 
-    const left = [];
-    const right = [];
-
-    for (let j = 0; j < arr.length; j++) {
-      if (j !== pivot) {
-        if (arr[j] > pivotValue) {
-          right.push(arr[j]);
-        } else {
-          left.push(arr[j]);
-        }
-      }
-    }
-
-    return [...quickSort(left), pivotValue, ...quickSort(right)];
-  };
-
-  const arrForSearch = [];
-
-  const sortedArr = quickSort(nums);
-
-  const binarySearch = (arr, target) => {
-    let max = arr.length - 1;
-    let min = 0;
-
-    while (max >= min) {
-      const mid = Math.floor((max + min) / 2);
-
-      if (arr[min] === target) {
-        return mid;
-      } else if (arr[mid] < target) {
-        min = mid + 1;
-      } else {
-        max = mid - 1;
-      }
-    }
-
-    return -1;
-  };
-
-  for (let i = 0; i < sortedArr.length; i++) {
-    if (binarySearch(arrForSearch, sortedArr[i]) !== -1) {
-      return true;
-    } else {
-      arrForSearch.push(sortedArr[i]);
-    }
+    if (hash.get(nums[i]) > 1) return true;
   }
 
   return false;
