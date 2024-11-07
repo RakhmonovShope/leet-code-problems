@@ -1,20 +1,33 @@
-const chunk = (arr, size) => {
-  if (!arr.length) return [];
+// const chunk = (arr, size) => {
+//   if (!arr.length) return [];
+//
+//   if (size >= arr) return [arr];
+//
+//   const result = [];
+//   let newArr = [];
+//
+//   for (let i = 0; i < arr.length; i++) {
+//     newArr.push(arr[i]);
+//
+//     if (newArr.length === size) {
+//       result.push(newArr);
+//       newArr = [];
+//     } else if (i === arr.length - 1) {
+//       result.push(newArr);
+//     }
+//   }
+//
+//   return result;
+// };
 
-  if (size >= arr) return [arr];
+const chunk = (arr, size) => {
+  let i = 0;
 
   const result = [];
-  let newArr = [];
 
-  for (let i = 0; i < arr.length; i++) {
-    newArr.push(arr[i]);
-
-    if (newArr.length === size) {
-      result.push(newArr);
-      newArr = [];
-    } else if (i === arr.length - 1) {
-      result.push(newArr);
-    }
+  while (i < arr.length) {
+    result.push(arr.slice(i, i + size));
+    i += size;
   }
 
   return result;
