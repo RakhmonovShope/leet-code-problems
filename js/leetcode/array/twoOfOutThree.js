@@ -21,12 +21,15 @@
 
 function twoOfOutThree(nums1, nums2, nums3) {
   const hash = new Set();
+  const hash1 = new Set(nums1);
+  const hash2 = new Set(nums2);
+  const hash3 = new Set(nums3);
 
   for (let i of nums1) {
     if (!hash.has(i)) {
-      if (nums2.includes(i)) {
+      if (hash2.has(i)) {
         hash.add(i);
-      } else if (nums3.includes(i)) {
+      } else if (hash3.has(i)) {
         hash.add(i);
       }
     }
@@ -34,9 +37,9 @@ function twoOfOutThree(nums1, nums2, nums3) {
 
   for (let i of nums2) {
     if (!hash.has(i)) {
-      if (nums1.includes(i)) {
+      if (hash1.has(i)) {
         hash.add(i);
-      } else if (nums3.includes(i)) {
+      } else if (hash3.has(i)) {
         hash.add(i);
       }
     }
