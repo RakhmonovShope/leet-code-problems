@@ -1,13 +1,11 @@
 const bestTimeToByAndSellStock = (nums) => {
   let maxProfit = 0;
-  let item = nums[0];
+  let minSoFar = nums[0];
 
   for (let i = 0; i < nums.length; i++) {
-    if (item > nums[i]) {
-      item = nums[i];
-    } else if (maxProfit < nums[i] - item) {
-      maxProfit = nums[i] - item;
-    }
+    minSoFar = Math.min(minSoFar, nums[i]);
+
+    maxProfit = Math.max(maxProfit, nums[i] - minSoFar);
   }
 
   return maxProfit;
