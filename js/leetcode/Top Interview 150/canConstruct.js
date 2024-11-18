@@ -33,21 +33,41 @@
 //   return true;
 // };
 
+// const canConstruct = (ransomNote, magazine) => {
+//   const hash = new Map();
+//
+//   for (i of ransomNote) {
+//     hash.set(i, (hash.get(i) || 0) + 1);
+//   }
+//
+//   for (i of magazine) {
+//     if (hash.has(i) && hash.get(i) !== 0) {
+//       hash.set(i, hash.get(i) - 1);
+//     }
+//   }
+//
+//   for (value of hash.values()) {
+//     if (value !== 0) return false;
+//   }
+//
+//   return true;
+// };
+
 const canConstruct = (ransomNote, magazine) => {
   const hash = new Map();
 
-  for (i of ransomNote) {
+  for (const i of ransomNote) {
     hash.set(i, (hash.get(i) || 0) + 1);
   }
 
-  for (i of magazine) {
-    if (hash.has(i) && hash.get(i) !== 0) {
-      hash.set(i, hash.get(i) - 1);
+  for (const char of magazine) {
+    if (hash.has(char)) {
+      hash.set(char, hash.get(char) - 1);
     }
   }
 
-  for (value of hash.values()) {
-    if (value !== 0) return false;
+  for (const [key, value] of hash) {
+    if (value > 0) return false;
   }
 
   return true;
