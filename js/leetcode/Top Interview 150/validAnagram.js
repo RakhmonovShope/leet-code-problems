@@ -19,17 +19,47 @@
 //
 //   return true;
 // };
+//
+// const validAnagram = (s, t) => {
+//   if (s.length !== t.length) return false;
+//
+//   for (let i = 0; i < s.length; i++) {
+//     t = t.replace(s[i], '');
+//   }
+//
+//   if (t.length) return false;
+//
+//   return true;
+// };
+
+const quickSort = (str) => {
+  if (str.length < 2) return str;
+
+  let pivot = Math.floor(str.length / 2);
+  const pivotValue = str[pivot];
+  let left = '';
+  let right = '';
+
+  for (let i = 0; i < str.length; i++) {
+    if (i !== pivot) {
+      if (str.charCodeAt(i) > str.charCodeAt(pivot)) {
+        right += str[i];
+      } else {
+        left += str[i];
+      }
+    }
+  }
+
+  return quickSort(left) + pivotValue + quickSort(right);
+};
 
 const validAnagram = (s, t) => {
   if (s.length !== t.length) return false;
 
-  for (let i = 0; i < s.length; i++) {
-    t = t.replace(s[i], '');
-  }
+  const sortedS = quickSort(s);
+  const sortedT = quickSort(t);
 
-  if (t.length) return false;
-
-  return true;
+  return sortedS === sortedT;
 };
 
-console.log(validAnagram('anagrdam', 'nagarsam'));
+console.log(validAnagram('anagrams', 'nagaradm'));
