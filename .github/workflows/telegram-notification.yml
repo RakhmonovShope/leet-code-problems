@@ -12,15 +12,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Send notification to Telegram
+      - name: Send Notification to Telegram
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.LEET_CODE_TELEGRAM_BOT_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
         run: |
+          # Set variables for the notification
           COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
           COMMIT_AUTHOR="${{ github.actor }}"
           BRANCH_NAME="${{ github.ref_name }}"
-          curl -X POST https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage \
-          -d chat_id=$CHAT_ID \
-          -d text="📦 *Repository Update*\n\n*Branch:* ${BRANCH_NAME}\n*User:* ${COMMIT_AUTHOR}\n*Message:* ${COMMIT_MESSAGE}" \
-          -d parse_mode="Markdown"
+          REPO_NAME="${{ github.repository }}"
+          SERVICE_NAME="Backend payment_gateway"
+          ENV_TYPE="development"
+          VERSION="144"
+          LINK="https://hub.flymart.dev"
+
+          # Prettified Telegram message
+          curl -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
+            -d chat_id="$CHAT_ID" \
+            -d parse_mode="Markdown" \
+            -d text="
+#backend #payment_gateway #development *Service* : $SERVICE_NAME *Env Type* : $ENV_TYPE *Version* : $VERSION *Link* : [$LINK]($LINK) 💬 *Release Notes* : - $COMMIT_MESSAGE 👨‍💻 *$COMMIT_AUTHOR* "
