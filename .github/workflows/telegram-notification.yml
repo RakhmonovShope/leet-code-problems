@@ -20,7 +20,7 @@ jobs:
           COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
           COMMIT_AUTHOR="${{ github.actor }}"
           BRANCH_NAME="${{ github.ref_name }}"
-          curl -X POST https://api.telegram.org/bot7701182405:AAFkrdozNCsxGf-DaWw6MjPQ-rCYl70Mih4/sendMessage \
+          curl -X POST https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage \
           -d chat_id=$CHAT_ID \
           -d text="📦 *Repository Update*\n\n*Branch:* ${BRANCH_NAME}\n*User:* ${COMMIT_AUTHOR}\n*Message:* ${COMMIT_MESSAGE}" \
           -d parse_mode="Markdown"
