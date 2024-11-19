@@ -7,7 +7,7 @@ const isValidAnagrams = (s, t) => {
     hash.set(t[i], (hash.get(t[i]) || 0) - 1);
   }
 
-  for (let [key, value] of hash) {
+  for (let [_, value] of hash) {
     if (value !== 0) return false;
   }
 
@@ -19,33 +19,44 @@ var groupAnagrams = function (strs) {
 
   let result = [];
 
-  let i = 1;
+  let i = 0;
 
   while (i < strs.length) {
     const word = strs[i];
-    let j = i + 1;
+    let j = i;
+
     const arr = [];
 
-    while (j < strs.length) {
-      const isAnagram = isValidAnagrams(word, strs[j]);
+    if (!hash.has(i)) {
+      while (j < strs.length) {
+        const isAnagram = isValidAnagrams(word, strs[j]);
 
-      if (isAnagram && !hash.has(strs[j])) {
-        hash.set(strs[j], true);
-        arr.push(j);
+        if (isAnagram && !hash.has(j)) {
+          hash.set(j, true);
+          arr.push(strs[j]);
+        }
+
+        if (j === strs.length - 1 && !hash.has(i)) {
+          hash.set(i, true);
+          arr.push(word);
+        }
+
+        j++;
       }
-
-      if (j === strs.length - 1 && !hash.has(word)) {
-        hash.set(word, true);
-        arr.push(i);
-      }
-
-      j++;
     }
-    console.log(arr);
+
+    if (arr.length) {
+      result.push(arr);
+    }
+
     i++;
   }
+
+  return result;
 };
 
-const strs = ['eat', 'tea', 'tan', 'ate', 'nat', 'bat'];
+const strs = ['eat', 'tea', 'tan', 'ate', 'nat', 'bat', ''];
+// const strs = ['', ''];
+// const strs = ['a', 'a'];
 
-groupAnagrams(strs);
+console.log(groupAnagrams(strs));
