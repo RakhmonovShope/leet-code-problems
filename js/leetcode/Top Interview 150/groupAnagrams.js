@@ -15,17 +15,17 @@ const isValidAnagrams = (s, t) => {
 };
 
 var groupAnagrams = function (strs) {
-  const hash = new Map();
-
   let result = [];
 
   let i = 0;
 
+  const hash = new Map();
+
   while (i < strs.length) {
+    const storage = new Map();
+
     const word = strs[i];
     let j = i;
-
-    const arr = [];
 
     if (!hash.has(i)) {
       while (j < strs.length) {
@@ -33,20 +33,23 @@ var groupAnagrams = function (strs) {
 
         if (isAnagram && !hash.has(j)) {
           hash.set(j, true);
-          arr.push(strs[j]);
+          storage.set(j, strs[j]);
         }
 
         if (j === strs.length - 1 && !hash.has(i)) {
           hash.set(i, true);
-          arr.push(word);
+          storage.set(i, word);
         }
 
         j++;
       }
+    } else {
+      i++;
+      continue;
     }
 
-    if (arr.length) {
-      result.push(arr);
+    if (storage.size) {
+      result.push([...storage.values()]);
     }
 
     i++;
