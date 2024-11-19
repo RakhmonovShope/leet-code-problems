@@ -19,7 +19,7 @@ var groupAnagrams = function (strs) {
 
   let result = [];
 
-  let i = 0;
+  let i = 1;
 
   while (i < strs.length) {
     const word = strs[i];
