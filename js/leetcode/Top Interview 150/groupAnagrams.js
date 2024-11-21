@@ -1,58 +1,21 @@
-const isValidAnagrams = (s, t) => {
-  if (s.length !== t.length) return false;
-  const hash = new Map();
-
-  for (let i = 0; i < s.length; i++) {
-    hash.set(s[i], (hash.get(s[i]) || 0) + 1);
-    hash.set(t[i], (hash.get(t[i]) || 0) - 1);
-  }
-
-  for (let [_, value] of hash) {
-    if (value !== 0) return false;
-  }
-
-  return true;
-};
-
 var groupAnagrams = function (strs) {
+  const hash = new Map();
   let result = [];
 
-  let i = 0;
+  for (let i = 0; i < strs.length; i++) {
+    const str = strs[i];
 
-  const hash = new Map();
+    const sortedString = str.split('').sort().join('');
 
-  while (i < strs.length) {
-    const storage = new Map();
-
-    const word = strs[i];
-    let j = i;
-
-    if (!hash.has(i)) {
-      while (j < strs.length) {
-        const isAnagram = isValidAnagrams(word, strs[j]);
-
-        if (isAnagram && !hash.has(j)) {
-          hash.set(j, true);
-          storage.set(j, strs[j]);
-        }
-
-        if (j === strs.length - 1 && !hash.has(i)) {
-          hash.set(i, true);
-          storage.set(i, word);
-        }
-
-        j++;
-      }
+    if (hash.has(sortedString)) {
+      hash.set(sortedString, [...hash.get(sortedString), strs[i]]);
     } else {
-      i++;
-      continue;
+      hash.set(sortedString, [strs[i]]);
     }
+  }
 
-    if (storage.size) {
-      result.push([...storage.values()]);
-    }
-
-    i++;
+  for (let [key, anagrams] of hash) {
+    result.push(anagrams);
   }
 
   return result;
