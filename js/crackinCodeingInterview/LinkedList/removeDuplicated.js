@@ -32,8 +32,9 @@ class LinkedList {
   }
 
   generateLinkedList() {
-    const randomValues = generateTestCase(10, 38, true);
+    const randomValues = generateTestCase(10, 10, true);
 
+    console.log('randomValues', randomValues);
     for (let i = 0; i < randomValues.length; i++) {
       this.add(randomValues[i]);
     }
@@ -41,7 +42,7 @@ class LinkedList {
     return this.head;
   }
 
-  removeDuplicates() {
+  removeDuplicatesWithHash() {
     const hash = new Set();
 
     let current = this.head;
@@ -59,9 +60,27 @@ class LinkedList {
       current = prev.next;
     }
   }
+
+  removeDuplicatesWithoutHash() {
+    let current = this.head;
+
+    while (current !== null) {
+      let neighbour = current;
+
+      while (neighbour.next !== null) {
+        if (current.value === neighbour.next.value) {
+          neighbour.next = neighbour.next.next;
+        } else {
+          neighbour = neighbour.next;
+        }
+      }
+
+      current = current.next;
+    }
+  }
 }
 
 const linkedList = new LinkedList();
 
 linkedList.generateLinkedList();
-linkedList.removeDuplicates();
+linkedList.removeDuplicatesWithoutHash();
