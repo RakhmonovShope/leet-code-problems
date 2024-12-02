@@ -1,4 +1,4 @@
-export const generateTestCase = (size, maxValue, allowDuplicates) => {
+export default (size, maxValue, allowDuplicates) => {
   const list = [];
   const set = new Set();
 

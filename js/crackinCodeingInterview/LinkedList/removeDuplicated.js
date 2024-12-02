@@ -1,4 +1,4 @@
-import { generateTestCase } from './genereateTestCases';
+import generateTestCase from './genereateTestCases.js';
 
 export class Node {
   constructor(value) {
@@ -43,6 +43,7 @@ class LinkedList {
 
   removeDuplicates() {
     const hash = new Set();
+
     let current = this.head;
 
     let prev = null;
@@ -55,7 +56,12 @@ class LinkedList {
         prev = current;
       }
 
-      current = current.next;
+      current = prev.next;
     }
   }
 }
+
+const linkedList = new LinkedList();
+
+linkedList.generateLinkedList();
+linkedList.removeDuplicates();
