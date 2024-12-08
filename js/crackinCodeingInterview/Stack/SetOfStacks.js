@@ -22,6 +22,14 @@ class SetOfStacks {
       this.items[this.items.length - 1].pop();
     }
   }
+
+  popAt(index) {
+    const values = this.items[index];
+
+    if (values.length) {
+      values.pop();
+    }
+  }
 }
 
 const stack = new SetOfStacks();
