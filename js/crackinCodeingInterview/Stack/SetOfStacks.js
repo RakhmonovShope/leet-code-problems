@@ -9,7 +9,12 @@ class SetOfStacks {
 
     if (top.length !== this.threeshold) {
       top.push(value);
-      this.items[this.items.length - 1] = top;
+
+      if (!this.items[this.items.length - 1]) {
+        this.items.push(top);
+      } else {
+        this.items[this.items.length - 1] = top;
+      }
     } else {
       this.items.push([value]);
     }
@@ -24,10 +29,14 @@ class SetOfStacks {
   }
 
   popAt(index) {
-    const values = this.items[index];
+    if (!!this.items[index]) {
+      if (this.items[index].length) {
+        this.items[index].pop();
+      }
 
-    if (values.length) {
-      values.pop();
+      if (!this.items[index].length) {
+        this.items = this.items.filter((_, i) => i !== index);
+      }
     }
   }
 }
@@ -38,4 +47,12 @@ stack.push(23);
 stack.push(11);
 stack.push(145);
 stack.push(2);
+stack.push(20);
+stack.push(32);
+stack.push(98);
+stack.popAt(1);
+console.log(stack);
+stack.popAt(0);
+console.log(stack);
+stack.popAt(2);
 console.log(stack);
