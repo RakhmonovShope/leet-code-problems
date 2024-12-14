@@ -22,7 +22,7 @@ class SetOfStacks {
 
   pop() {
     if (this.items[this.items.length - 1].length === 1) {
-      this.items = this.items.splice(this.items.length - 1);
+      this.items.splice(this.items.length - 1);
     } else {
       this.items[this.items.length - 1].pop();
     }
