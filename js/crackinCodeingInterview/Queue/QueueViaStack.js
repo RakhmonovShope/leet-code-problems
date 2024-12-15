@@ -15,8 +15,10 @@ class QueueViaStack {
   dequeue() {
     if (this.isEmpty()) return 'Queue is empty';
 
-    while (this.mainStack.length) {
-      this.temporaryStack.push(this.mainStack.pop());
+    if (!this.temporaryStack.length) {
+      while (this.mainStack.length) {
+        this.temporaryStack.push(this.mainStack.pop());
+      }
     }
 
     return this.temporaryStack.pop();
@@ -41,6 +43,10 @@ queueWithStack.enqueue(34);
 queueWithStack.enqueue(22);
 queueWithStack.enqueue(98);
 console.log(queueWithStack);
+queueWithStack.dequeue();
+queueWithStack.dequeue();
+queueWithStack.enqueue(7);
+queueWithStack.enqueue(4);
 queueWithStack.dequeue();
 queueWithStack.dequeue();
 console.log(queueWithStack);
