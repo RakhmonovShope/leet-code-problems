@@ -8,6 +8,24 @@ const dfs = (graph, start, visited = new Set()) => {
   }
 };
 
+const dfsWithStack = (graph, start) => {
+  const stack = [start];
+  const visited = new Set();
+
+  while (stack.length > 0) {
+    const node = stack.pop();
+
+    if (!visited.has(node)) {
+      console.log(node);
+      visited.add(node);
+
+      for (let neighbour of graph[node] || []) {
+        stack.push(neighbour);
+      }
+    }
+  }
+};
+
 const graph = {
   A: ['B', 'C'],
   B: ['D'],
@@ -17,4 +35,4 @@ const graph = {
   F: [],
 };
 
-dfs(graph, 'A');
+dfsWithStack(graph, 'A');
