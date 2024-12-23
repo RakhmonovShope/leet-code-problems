@@ -29,4 +29,4 @@ const graph = {
   F: [],
 };
 
-console.log(routeBetweenNodes(graph, 'A', 'B'));
+console.log(routeBetweenNodes(graph, 'A', 'E'));
