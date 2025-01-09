@@ -1,6 +1,6 @@
 class Node {
   constructor(value) {
-    this.val = value;
+    this.value = value;
     this.left = null;
     this.right = null;
   }
@@ -48,15 +48,10 @@ class BinaryTree {
 
 const binaryTree = new BinaryTree();
 
-// for (let i = 1; i < 10; i++) {
-//   binaryTree.insert(i);
-// }
+for (let i = 1; i <= 8; i++) {
+  binaryTree.insert(i);
+}
 
-binaryTree.insert(1);
-binaryTree.insert(2);
-binaryTree.insert(3);
-binaryTree.insert(4);
-binaryTree.insert(5);
 console.log('Binary Tree Inorder Traversal:', binaryTree.inorderTraversal());
 
 // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
