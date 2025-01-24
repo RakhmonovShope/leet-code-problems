@@ -1,30 +1,27 @@
 var canBeValid = function (s, locked) {
   if (s.length % 2 !== 0) return false;
 
-  const stack = [];
-  let closeCount = 0;
+  let open = 0;
+  let close = 0;
 
   for (let i = 0; i < s.length; i++) {
-    if (s[i] === ')') closeCount++;
-
-    if (stack.length) {
-      if (s[i] === ')' || (s[i] === '(' && locked[i] === '0')) {
-        stack.pop();
-        closeCount--;
-      }
-    }
-
-    if (s[i] === '(' || (s[i] === ')' && locked[i] === '0')) {
-      stack.push('(');
+    if (locked[i] === '0') {
+      open++;
+    } else if (s[i] === '(') {
+      open++;
+    } else {
+      close++;
     }
   }
 
-  return !stack.length && !closeCount;
+  return open === close;
 };
 
 // const s = '))()))';
-const s = '))))(())((()))))((()((((((())())((()))((((())()()))(()';
 // const locked = '010100';
+const s = '))))(())((()))))((()((((((())())((()))((((())()()))(()';
 const locked = '101100101111110000000101000101001010110001110000000101';
+// const s = '()';
+// const locked = '01';
 
 console.log(canBeValid(s, locked));
