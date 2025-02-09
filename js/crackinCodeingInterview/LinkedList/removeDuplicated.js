@@ -59,6 +59,8 @@ class LinkedList {
 
       current = prev.next;
     }
+
+    return this.head;
   }
 
   removeDuplicatesWithoutHash() {
@@ -77,10 +79,12 @@ class LinkedList {
 
       current = current.next;
     }
+
+    return this.head;
   }
 }
 
 const linkedList = new LinkedList();
 
 linkedList.generateLinkedList();
-linkedList.removeDuplicatesWithoutHash();
+console.log(JSON.stringify(linkedList.removeDuplicatesWithHash(), null, 2));
