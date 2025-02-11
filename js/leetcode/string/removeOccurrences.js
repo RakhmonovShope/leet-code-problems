@@ -4,12 +4,27 @@
  * @return {string}
  */
 
+// var removeOccurrences = function (s, part) {
+//   while (s.includes(part)) {
+//     s = s.replace(part, '');
+//   }
+//
+//   return s;
+// };
+
 var removeOccurrences = function (s, part) {
-  while (s.includes(part)) {
-    s = s.replace(part, '');
+  const stack = [];
+  const partL = part.length;
+
+  for (let char of s) {
+    stack.push(char);
+
+    if (stack.length >= partL && stack.slice(-partL).join('') === part) {
+      stack.length -= partL;
+    }
   }
 
-  return s;
+  return stack.join('');
 };
 
 const s = 'daabcbaabcbc';
