@@ -5,6 +5,7 @@ var isArraySpecial = function (nums) {
       (nums[i] % 2 === 1 && nums[i + 1] % 2 === 1)
     ) {
       return false;
+      w;
     }
   }
 
