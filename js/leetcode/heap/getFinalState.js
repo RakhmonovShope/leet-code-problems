@@ -48,6 +48,20 @@ class Heap {
     [this.heap[i], this.heap[j]] = [this.heap[j], this.heap[i]];
   }
 
+  left(index) {
+    const pos = 2 * index + 1;
+    return pos < this.heap.length ? pos : null;
+  }
+
+  right(index) {
+    const pos = 2 * index + 2;
+    return pos < this.heap.length ? pos : null;
+  }
+
+  parent(index) {
+    return index > 0 ? Math.floor((index - 1) / 2) : null;
+  }
+
   bubbleUp() {
     let curr = this.heap.length - 1;
     let parent = this.parent(curr);
@@ -62,20 +76,6 @@ class Heap {
       curr = parent;
       parent = this.parent(curr);
     }
-  }
-
-  left(index) {
-    const pos = 2 * index + 1;
-    return pos < this.heap.length ? pos : null;
-  }
-
-  right(index) {
-    const pos = 2 * index + 2;
-    return pos < this.heap.length ? pos : null;
-  }
-
-  parent(index) {
-    return index > 0 ? Math.floor((index - 1) / 2) : null;
   }
 
   heapifyDown(index) {
