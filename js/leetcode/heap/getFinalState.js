@@ -29,7 +29,7 @@ class Heap {
   }
 
   insert(value, index) {
-    this.heap.push([value, index]);
+    this.heap.push({ value, index });
     this.bubbleUp();
   }
 
@@ -44,54 +44,67 @@ class Heap {
     return min;
   }
 
+  swap(i, j) {
+    [this.heap[i], this.heap[j]] = [this.heap[j], this.heap[i]];
+  }
+
   bubbleUp() {
-    let index = this.heap.length - 1;
+    let curr = this.heap.length - 1;
+    let parent = this.parent(curr);
 
-    while (index > 0) {
-      let parentIndex = Math.floor((index - 1) / 2);
-
-      if (this.heap[parentIndex][0] <= this.heap[index][0]) break;
-
-      [this.heap[parentIndex], this.heap[index]] = [
-        this.heap[index],
-        this.heap[parentIndex],
-      ];
-
-      index = parentIndex;
+    while (
+      parent !== null &&
+      (this.heap[curr].value < this.heap[parent].value ||
+        (this.heap[curr].value === this.heap[parent].value &&
+          this.heap[curr].index < this.heap[parent].index))
+    ) {
+      this.swap(curr, parent);
+      curr = parent;
+      parent = this.parent(curr);
     }
+  }
+
+  left(index) {
+    const pos = 2 * index + 1;
+    return pos < this.heap.length ? pos : null;
+  }
+
+  right(index) {
+    const pos = 2 * index + 2;
+    return pos < this.heap.length ? pos : null;
+  }
+
+  parent(index) {
+    return index > 0 ? Math.floor((index - 1) / 2) : null;
   }
 
   heapifyDown(index) {
-    let leftChild = 2 * index + 1;
-    let rightChild = 2 * index + 2;
+    const left = this.left(index);
+    const right = this.right(index);
     let smallest = index;
 
     if (
-      leftChild < this.heap.length &&
-      this.heap[leftChild][0] < this.heap[smallest][0]
+      left !== null &&
+      (this.heap[left].value < this.heap[smallest].value ||
+        (this.heap[left].value === this.heap[smallest].value &&
+          this.heap[left].index < this.heap[smallest].index))
     ) {
-      smallest = leftChild;
+      smallest = left;
     }
 
     if (
-      rightChild < this.heap.length &&
-      this.heap[rightChild][0] < this.heap[smallest][0]
+      right !== null &&
+      (this.heap[right].value < this.heap[smallest].value ||
+        (this.heap[right].value === this.heap[smallest].value &&
+          this.heap[right].index < this.heap[smallest].index))
     ) {
-      smallest = rightChild;
+      smallest = right;
     }
 
     if (smallest !== index) {
-      [this.heap[index], this.heap[smallest]] = [
-        this.heap[smallest],
-        this.heap[index],
-      ];
-
+      this.swap(index, smallest);
       this.heapifyDown(smallest);
     }
-  }
-
-  peek() {
-    return this.heap.length ? this.heap[0] : null;
   }
 }
 
@@ -100,20 +113,19 @@ var getFinalState = function (nums, k, multiplier) {
 
   for (let i = 0; i < nums.length; i++) {
     minHeap.insert(nums[i], i);
-    console.log(minHeap.heap);
   }
 
   while (k) {
-    const [value, index] = minHeap.extractMin();
-
-    nums[index] = value * multiplier;
-
-    minHeap.insert(nums[index], index);
+    let { value, index } = minHeap.extractMin();
+    const newValue = value * multiplier;
+    minHeap.insert(newValue, index);
 
     k--;
   }
 
-  return nums;
+  return minHeap.heap
+    .sort((a, b) => a.index - b.index)
+    .map((item) => item.value);
 };
 
 const nums = [2, 1, 3, 5, 6];
