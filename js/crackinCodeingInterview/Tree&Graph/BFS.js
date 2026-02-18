@@ -8,8 +8,6 @@ const bfs = (graph, start) => {
     if (!visited.has(node)) {
       visited.add(node);
 
-      console.log(node);
-
       for (let neighbour of graph[node] || []) {
         if (!visited.has(neighbour)) {
           queue.push(neighbour);
